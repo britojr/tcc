@@ -20,7 +20,7 @@ var seed = func() int64 {
 
 // RandomKtree returns a random k-tree with n nodes.
 func RandomKtree(n, k int) (*ktree.Ktree, error) {
-	C, err := randomCode(n, k)
+	C, err := RandomCode(n, k)
 	if err != nil {
 		return nil, err
 	}
@@ -35,8 +35,8 @@ func RandomKtree(n, k int) (*ktree.Ktree, error) {
 	return Tk, nil
 }
 
-// randomCode returns a random code for a k-tree with n nodes.
-func randomCode(n, k int) (*codec.Code, error) {
+// RandomCode returns a random code for a k-tree with n nodes.
+func RandomCode(n, k int) (*codec.Code, error) {
 	if n-2 < k {
 		// For more information, see Remark 1 in Caminiti et al.
 		return nil, errors.New("This code requires n >= k+2.")
