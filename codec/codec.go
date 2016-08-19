@@ -160,11 +160,11 @@ func findLm(n int, phi, p, Q []int) int {
 // TODO: remove repetitions
 // DecodingCharTree receives a code (Q, S) and returns a characteristic-tree T.
 func DecodingCharTree(code *Code) (*characteristic.Tree, error) {
-	log.Printf("Decoding Algorithm received input {%v, %v}\n", code.Q, code.S)
+	//~ log.Printf("Decoding Algorithm received input {%v, %v}\n", code.Q, code.S)
 	Q, S := code.Q, code.S
 
 	// Step 1: Compute phi, q, x, lm.
-	log.Println("Step 1...")
+	//~ log.Println("Step 1...")
 	k := len(Q)
 	n := len(S.P) + k + 2
 	phi := ktree.ComputePhi(n, k, Q)
@@ -179,17 +179,17 @@ func DecodingCharTree(code *Code) (*characteristic.Tree, error) {
 	if x < cor {
 		cor--
 	}
-	log.Printf("phi = %v; q = %v; x = %v\n", phi, q, x)
-	log.Printf("lm = %v; phi[lm] = %v; cor = %v\n", lm, phi[lm], cor)
+	//~ log.Printf("phi = %v; q = %v; x = %v\n", phi, q, x)
+	//~ log.Printf("lm = %v; phi[lm] = %v; cor = %v\n", lm, phi[lm], cor)
 
 	// Step 2: Insert the pair (0, e) in index cor and decode S to obtain T.
-	log.Println("Step 2...")
+	//~ log.Println("Step 2...")
 	S.P = append(S.P[:cor], append([]int{0}, S.P[cor:]...)...)
 	S.L = append(S.L[:cor], append([]int{characteristic.E}, S.L[cor:]...)...)
-	log.Printf("S = %v\n", S)
+	//~ log.Printf("S = %v\n", S)
 	// The +1 is required because of the reindexing.
 	T := dandelion.Decode(S, x+1)
-	log.Printf("T = %v\n", T)
+	//~ log.Printf("T = %v\n", T)
 
 	return T, nil
 }
