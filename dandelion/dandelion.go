@@ -4,7 +4,7 @@ package dandelion
 import (
 	"sort"
 
-	"github.com/tmadeira/tcc/characteristic"
+	"github.com/britojr/tcc/characteristic"
 )
 
 // DandelionCode represents a coded tree (see Section 4 of Caminiti et al).

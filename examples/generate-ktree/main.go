@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/tmadeira/tcc/generator"
+	"github.com/britojr/tcc/generator"
 )
 
 func main() {

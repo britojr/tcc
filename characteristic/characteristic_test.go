@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/tmadeira/tcc/ktree"
+	"github.com/britojr/tcc/ktree"
 )
 
 var relabeledFig1A ktree.Ktree = ktree.Ktree{

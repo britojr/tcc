@@ -8,10 +8,10 @@ import (
 	"sort"
 	"time"
 
-	"github.com/tmadeira/tcc/characteristic"
-	"github.com/tmadeira/tcc/codec"
-	"github.com/tmadeira/tcc/dandelion"
-	"github.com/tmadeira/tcc/ktree"
+	"github.com/britojr/tcc/characteristic"
+	"github.com/britojr/tcc/codec"
+	"github.com/britojr/tcc/dandelion"
+	"github.com/britojr/tcc/ktree"
 )
 
 var seed = func() int64 {
