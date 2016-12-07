@@ -5,9 +5,9 @@ import (
 	"errors"
 	"log"
 
-	"github.com/tmadeira/tcc/characteristic"
-	"github.com/tmadeira/tcc/dandelion"
-	"github.com/tmadeira/tcc/ktree"
+	"github.com/britojr/tcc/characteristic"
+	"github.com/britojr/tcc/dandelion"
+	"github.com/britojr/tcc/ktree"
 )
 
 type Code struct {

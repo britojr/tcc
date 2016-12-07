@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/tmadeira/tcc/characteristic"
+	"github.com/britojr/tcc/characteristic"
 )
 
 func TestCodeFig2C(t *testing.T) {

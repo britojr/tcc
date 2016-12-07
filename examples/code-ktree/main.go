@@ -5,8 +5,8 @@ import (
 	"log"
 	"sort"
 
-	"github.com/tmadeira/tcc/codec"
-	"github.com/tmadeira/tcc/ktree"
+	"github.com/britojr/tcc/codec"
+	"github.com/britojr/tcc/ktree"
 )
 
 func main() {

@@ -4,7 +4,7 @@ package characteristic
 import (
 	"sort"
 
-	"github.com/tmadeira/tcc/ktree"
+	"github.com/britojr/tcc/ktree"
 )
 
 type Tree struct {
