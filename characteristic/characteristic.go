@@ -228,3 +228,40 @@ func ChildrenList(T *Tree) [][]int {
 	}
 	return children
 }
+
+// ExtractCliqueList creates the pre-labeled clique list from a characteristic
+// tree
+func ExtractCliqueList(T *Tree, n, k int) [][]int {
+	children := ChildrenList(T)
+	// Initialize auxiliar clique matrix
+	K := make([][]int, n-k+1)
+	K[0] = make([]int, k)
+	for i := 0; i < k; i++ {
+		K[0][i] = n - (k - i) + 1
+	}
+	// Visit T in BFS order, starting with the children of the root
+	queue := make([]int, n)
+	start, end := 0, 0
+	for i := 0; i < len(children[0]); i++ {
+		queue[end] = children[0][i]
+		end++
+	}
+	for start != end {
+		v := queue[start]
+		start++
+		for i := 0; i < len(K[T.P[v]]); i++ {
+			if i != T.L[v] {
+				K[v] = append(K[v], K[T.P[v]][i])
+			}
+		}
+		if T.P[v] != 0 {
+			K[v] = append(K[v], T.P[v])
+			sort.Ints(K[v])
+		}
+		for i := 0; i < len(children[v]); i++ {
+			queue[end] = children[v][i]
+			end++
+		}
+	}
+	return K
+}

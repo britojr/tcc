@@ -34,6 +34,7 @@ var Tk Tree = Tree{
 	[]int{-1, 2, -1, -1, 0, 2, 1, 2, -1},
 }
 
+var n, k = 11, 3
 var childrenTk = [][]int{
 	{2, 3, 8},
 	{7},
@@ -44,6 +45,18 @@ var childrenTk = [][]int{
 	(nil),
 	(nil),
 	{5, 6},
+}
+
+var KTk = [][]int{
+	{9, 10, 11},
+	{5, 8, 9},
+	{9, 10, 11},
+	{9, 10, 11},
+	{2, 10, 11},
+	{8, 9, 10},
+	{8, 9, 11},
+	{1, 5, 8},
+	{9, 10, 11},
 }
 
 func TestTreeFrom(t *testing.T) {
@@ -67,5 +80,13 @@ func TestChildrenList(t *testing.T) {
 	got := ChildrenList(&Tk)
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("ChildrenList(%v) = %v; want %v", Tk, got, want)
+	}
+}
+
+func TestExtractCliqueList(t *testing.T) {
+	want := KTk
+	got := ExtractCliqueList(&Tk, n, k)
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("got %v; want %v", got, want)
 	}
 }
