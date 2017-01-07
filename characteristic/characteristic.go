@@ -217,3 +217,14 @@ func RenyiKtreeFrom(n, k int, Q []int, T *Tree) *ktree.RenyiKtree {
 
 	return Rk
 }
+
+// ChildrenList creates the children array from a Characteristic Tree
+func ChildrenList(T *Tree) [][]int {
+	children := make([][]int, len(T.P))
+	for i := 0; i < len(T.P); i++ {
+		if T.P[i] != -1 {
+			children[T.P[i]] = append(children[T.P[i]], i)
+		}
+	}
+	return children
+}

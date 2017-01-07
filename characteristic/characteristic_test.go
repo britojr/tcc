@@ -34,6 +34,18 @@ var Tk Tree = Tree{
 	[]int{-1, 2, -1, -1, 0, 2, 1, 2, -1},
 }
 
+var childrenTk = [][]int{
+	{2, 3, 8},
+	{7},
+	{4},
+	(nil),
+	(nil),
+	{1},
+	(nil),
+	(nil),
+	{5, 6},
+}
+
 func TestTreeFrom(t *testing.T) {
 	want := &Tk
 	got := TreeFrom(&Rk)
@@ -47,5 +59,13 @@ func TestRenyiKtreeFrom(t *testing.T) {
 	got := RenyiKtreeFrom(11, 3, []int{1, 2, 8}, &Tk)
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("RenyiKtreeFrom(%v) = %v; want %v", Tk, got, want)
+	}
+}
+
+func TestChildrenList(t *testing.T) {
+	want := childrenTk
+	got := ChildrenList(&Tk)
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("ChildrenList(%v) = %v; want %v", Tk, got, want)
 	}
 }
