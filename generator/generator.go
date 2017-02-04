@@ -35,6 +35,25 @@ func RandomKtree(n, k int) (*ktree.Ktree, error) {
 	return Tk, nil
 }
 
+// RandomCharTree Generates a random code and returns the characteristic tree and inverse phi
+func RandomCharTree(n, k int) (*characteristic.Tree, []int, error) {
+	// Generate a random code
+	C, err := RandomCode(n, k)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	// Decode a characteristic tree
+	T, err := codec.DecodingCharTree(C)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	// Calculate inverse phi for relabeling
+	iphi := ktree.GetInverse(ktree.ComputePhi(n, k, C.Q))
+	return T, iphi, nil
+}
+
 // RandomCode returns a random code for a k-tree with n nodes.
 func RandomCode(n, k int) (*codec.Code, error) {
 	if n-2 < k {
@@ -62,13 +81,13 @@ func RandomCode(n, k int) (*codec.Code, error) {
 	sort.Ints(C.Q)
 
 	for i := 0; i < ssz; i++ {
-		r := rand.Intn((n - k) * k + 1)
+		r := rand.Intn((n-k)*k + 1)
 		if r == 0 {
 			C.S.P[i] = 0
 			C.S.L[i] = characteristic.E
 		} else {
 			r--
-			C.S.P[i] = 1 + r / k
+			C.S.P[i] = 1 + r/k
 			C.S.L[i] = r % k
 		}
 	}
