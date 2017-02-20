@@ -33,7 +33,7 @@ var Tk Tree = Tree{
 	[]int{-1, 5, 0, 0, 2, 8, 8, 1, 0},
 	[]int{-1, 2, -1, -1, 0, 2, 1, 2, -1},
 }
-
+var iphi = []int{0, 10, 9, 3, 4, 5, 6, 7, 1, 2, 8}
 var n, k = 11, 3
 var childrenTk = [][]int{
 	{2, 3, 8},
@@ -46,7 +46,17 @@ var childrenTk = [][]int{
 	(nil),
 	{5, 6},
 }
-
+var adjTk = [][]int{
+	{2, 3, 8},
+	{7, 5},
+	{4, 0},
+	{0},
+	{2},
+	{1, 8},
+	{8},
+	{1},
+	{5, 6, 0},
+}
 var KTk = [][]int{
 	{9, 10, 11},
 	{5, 8, 9},
@@ -57,6 +67,17 @@ var KTk = [][]int{
 	{8, 9, 11},
 	{1, 5, 8},
 	{9, 10, 11},
+}
+var cliquesTk = [][]int{
+	[]int{1, 2, 8},
+	[]int{0, 4, 7, 1},
+	[]int{10, 1, 2, 8},
+	[]int{9, 1, 2, 8},
+	[]int{3, 10, 2, 8},
+	[]int{4, 7, 1, 2},
+	[]int{5, 7, 1, 8},
+	[]int{6, 0, 4, 7},
+	[]int{7, 1, 2, 8},
 }
 
 func TestTreeFrom(t *testing.T) {
@@ -77,16 +98,19 @@ func TestRenyiKtreeFrom(t *testing.T) {
 
 func TestChildrenList(t *testing.T) {
 	want := childrenTk
-	got := ChildrenList(&Tk)
+	got := childrenList(&Tk)
 	if !reflect.DeepEqual(got, want) {
-		t.Errorf("ChildrenList(%v) = %v; want %v", Tk, got, want)
+		t.Errorf("childrenList(%v) = %v; want %v", Tk, got, want)
 	}
 }
 
-func TestExtractCliqueList(t *testing.T) {
-	want := KTk
-	got := ExtractCliqueList(&Tk, n, k)
-	if !reflect.DeepEqual(got, want) {
-		t.Errorf("got %v; want %v", got, want)
+func TestExtractCliqueTree(t *testing.T) {
+	wantclique, wantadj := cliquesTk, adjTk
+	gotclique, gotadj := ExtractCliqueTree(&Tk, iphi)
+	if !reflect.DeepEqual(gotclique, wantclique) {
+		t.Errorf("Clique: got %v; want %v", gotclique, wantclique)
+	}
+	if !reflect.DeepEqual(gotadj, wantadj) {
+		t.Errorf("Adj: got %v; want %v", gotadj, wantadj)
 	}
 }
