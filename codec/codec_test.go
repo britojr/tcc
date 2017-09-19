@@ -94,18 +94,25 @@ func TestDecodeCharTree(t *testing.T) {
 		[]int{-1, 2, -1, -1, 0, 2, 1, 2, -1},
 	}
 	iphiFig1A := []int{0, 10, 9, 3, 4, 5, 6, 7, 1, 2, 8}
-
-	gotT, gotIphi, err := DecodeCharTree(codedFig1A)
-	wantT := charTreeFig1A
-	wantIphi := iphiFig1A
-
-	if err != nil {
-		t.Errorf("Decoding(%v) got error %v", codedFig1A, err)
+	cases := []struct {
+		coded    *Code
+		charTree *characteristic.Tree
+		iphi     []int
+	}{
+		{codedFig1A, charTreeFig1A, iphiFig1A},
+		{codedFig1A, charTreeFig1A, iphiFig1A},
 	}
-	if !reflect.DeepEqual(gotT, wantT) {
-		t.Errorf("Decoding(%v) = %v, _; want %v, _", codedFig1A, gotT, wantT)
-	}
-	if !reflect.DeepEqual(gotIphi, wantIphi) {
-		t.Errorf("Decoding(%v) = _, %v; want _, %v", codedFig1A, gotIphi, wantIphi)
+
+	for _, tt := range cases {
+		gotT, gotIphi, err := DecodeCharTree(tt.coded)
+		if err != nil {
+			t.Errorf("Decoding(%v) got error %v", tt.coded, err)
+		}
+		if !reflect.DeepEqual(gotT, tt.charTree) {
+			t.Errorf("Decoding(%v) \ngot:\n'%v'\nwant:\n'%v'\n", tt.coded, gotT, tt.charTree)
+		}
+		if !reflect.DeepEqual(gotIphi, tt.iphi) {
+			t.Errorf("Decoding(%v) \ngot:\n'%v'\nwant:\n'%v'\n", tt.coded, gotIphi, tt.iphi)
+		}
 	}
 }

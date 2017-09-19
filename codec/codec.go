@@ -159,7 +159,13 @@ func findLm(n int, phi, p, Q []int) int {
 
 // DecodeCharTree receives a code (Q, S) and returns a characteristic-tree T.
 func DecodeCharTree(code *Code) (*characteristic.Tree, []int, error) {
-	Q, S := code.Q, code.S
+	// Q, S := code.Q, code.S
+	Q := code.Q
+	// copy code to avoid colateral effects
+	S := &dandelion.DandelionCode{
+		P: append([]int(nil), code.S.P...),
+		L: append([]int(nil), code.S.L...),
+	}
 
 	// Step 1: Compute phi, q, x, lm.
 	k := len(Q)
