@@ -44,13 +44,10 @@ func RandomCharTree(n, k int) (*characteristic.Tree, []int, error) {
 	}
 
 	// Decode a characteristic tree
-	T, err := codec.DecodingCharTree(C)
+	T, iphi, err := codec.DecodeCharTree(C)
 	if err != nil {
 		return nil, nil, err
 	}
-
-	// Calculate inverse phi for relabeling
-	iphi := ktree.GetInverse(ktree.ComputePhi(n, k, C.Q))
 	return T, iphi, nil
 }
 
