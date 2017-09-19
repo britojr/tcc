@@ -80,3 +80,32 @@ func TestDecodingAlgorithm(t *testing.T) {
 		t.Errorf("Decoding(%v) = %v, _; want %v, <nil>", codedFig1A, got, want)
 	}
 }
+
+func TestDecodeCharTree(t *testing.T) {
+	codedFig1A := &Code{
+		[]int{1, 2, 8},
+		&dandelion.DandelionCode{
+			[]int{0, 2, 8, 8, 1, 5},
+			[]int{e, 0, 2, 1, 2, 2},
+		},
+	}
+	charTreeFig1A := &characteristic.Tree{
+		[]int{-1, 5, 0, 0, 2, 8, 8, 1, 0},
+		[]int{-1, 2, -1, -1, 0, 2, 1, 2, -1},
+	}
+	iphiFig1A := []int{0, 10, 9, 3, 4, 5, 6, 7, 1, 2, 8}
+
+	gotT, gotIphi, err := DecodeCharTree(codedFig1A)
+	wantT := charTreeFig1A
+	wantIphi := iphiFig1A
+
+	if err != nil {
+		t.Errorf("Decoding(%v) got error %v", codedFig1A, err)
+	}
+	if !reflect.DeepEqual(gotT, wantT) {
+		t.Errorf("Decoding(%v) = %v, _; want %v, _", codedFig1A, gotT, wantT)
+	}
+	if !reflect.DeepEqual(gotIphi, wantIphi) {
+		t.Errorf("Decoding(%v) = _, %v; want _, %v", codedFig1A, gotIphi, wantIphi)
+	}
+}
